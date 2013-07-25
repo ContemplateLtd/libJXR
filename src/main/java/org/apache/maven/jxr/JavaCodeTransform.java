@@ -6,6 +6,7 @@ package org.apache.maven.jxr;
  * March 2000
  *
  * Copyright (C) 2000 CoolServlets.com
+ *               2013 The University of Edinburgh   
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -40,6 +41,7 @@ import org.apache.maven.jxr.pacman.PackageType;
 import org.apache.maven.jxr.util.SimpleWordTokenizer;
 import org.apache.maven.jxr.util.StringEntry;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,6 +60,7 @@ import java.io.Writer;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Vector;
+
 
 /**
  * Syntax highlights java by turning it into html. A codeviewer object is
@@ -122,12 +125,12 @@ public class JavaCodeTransform
     /**
      * start String delimiter
      */
-    public static final String STRING_START = "<span class=\"jxr_string\">";
+    public static final String STRING_START = "<div class=\"jxr_string\">";
 
     /**
      * end String delimiter
      */
-    public static final String STRING_END = "</span>";
+    public static final String STRING_END = "</div>";
 
     /**
      * start reserved word delimiter
@@ -274,7 +277,7 @@ public class JavaCodeTransform
         String outputEncoding = this.outputEncoding;
         if ( outputEncoding == null )
         {
-            outputEncoding = "ISO-8859-1";
+            outputEncoding = "UTF-8";
         }
 
         // header
@@ -318,7 +321,7 @@ public class JavaCodeTransform
         buffer.append( "</head>\n" ).append( "<body>\n" ).append( this.getFileOverview() );
 
         // start code section
-        buffer.append( "<pre>\n" );
+        buffer.append( "<pre>" ); //Remove a new line to facilitate styling
 
         return buffer.toString();
     }
@@ -330,7 +333,7 @@ public class JavaCodeTransform
      */
     public final String getFooter()
     {
-        return "</pre>\n" + "<hr/>" + "<div id=\"footer\">" + JXR.NOTICE + "</div>" + "</body>\n" + "</html>\n";
+        return "<hr/>\n<div id=\"footer\">" + JXR.FOOTER + "</div>\n";
     }
 
     /**
@@ -366,27 +369,36 @@ public class JavaCodeTransform
 
         if ( showHeader )
         {
-            out.println( getHeader() );
+            out.print( getHeader() ); //println gives additional line
         }
 
         int linenumber = 1;
         while ( ( line = in.readLine() ) != null )
         {
             if ( LINE_NUMBERS )
-            {
-                out.print( "<a class=\"jxr_linenumber\" name=\"" + linenumber + "\" " + "href=\"#" + linenumber + "\">" + linenumber
-                    + "</a>" + getLineWidth( linenumber ) );
+            {/* Each line is contained within a div for convenience when
+            wanting to dosomething fancy with the display*/
+            	out.print( "<div class=\"" + linenumber + "\">" +
+            			"<a class=\"jxr_linenumber\" name=\"" + linenumber + "\" " + "href=\"#" + linenumber + "\">" + linenumber
+                        + "</a>" + getLineWidth( linenumber ) );
             }
 
-            out.println( this.syntaxHighlight( line ) );
+            out.println( (this.syntaxHighlight( line )) + "</div>" );
 
             ++linenumber;
         }
+
+        /*Finalise the pre tag*/
+        out.println("</pre>\n");
 
         if ( showFooter )
         {
             out.println( getFooter() );
         }
+        
+        /*Finalize the html*/
+        
+        out.println("</body>\n</html>\n");
 
         out.flush();
     }
@@ -436,7 +448,7 @@ public class JavaCodeTransform
                 fw = new FileWriter( destfile );
             }
 
-            transform( fr, fw, locale, inputEncoding, outputEncoding, javadocLinkDir, revision, true, true );
+            transform( fr, fw, locale, inputEncoding, outputEncoding, javadocLinkDir, revision, JXR.showHeader, JXR.showFooter);
         }
         catch ( RuntimeException e )
         {

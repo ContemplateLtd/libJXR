@@ -19,10 +19,6 @@ package org.apache.maven.jxr;
  * under the License.
  */
 
-import org.apache.maven.jxr.ant.DirectoryScanner;
-import org.apache.maven.jxr.log.Log;
-import org.apache.maven.jxr.pacman.FileManager;
-import org.apache.maven.jxr.pacman.PackageManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,11 +28,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.maven.jxr.ant.DirectoryScanner;
+import org.apache.maven.jxr.log.Log;
+import org.apache.maven.jxr.pacman.FileManager;
+import org.apache.maven.jxr.pacman.PackageManager;
+
+
+
 /**
  * Main entry point into Maven used to kick off the XReference code building.
  *
  * @author <a href="mailto:burton@apache.org">Kevin A. Burton</a>
- * @version $Id$
+ * @version $Id: JXR.java 692692 2008-09-06 17:34:46Z hboutemy $
  */
 public class JXR
 {
@@ -52,6 +55,12 @@ public class JXR
         + "<a href=\"http://maven.apache.org/\">Maven</a>";
 
     /**
+     * Footer equal to the notice, by default
+     */
+    
+    public static String FOOTER = NOTICE;
+    
+    /**
      * The default list of include patterns to use.
      */
     private static final String[] DEFAULT_INCLUDES = {"**/*.java"};
@@ -66,6 +75,10 @@ public class JXR
     private String inputEncoding;
 
     private String outputEncoding;
+    
+    public static boolean showHeader = true;
+    
+    public static boolean showFooter = true;
 
     /**
      * Relative path to javadocs, suitable for hyperlinking.
@@ -192,6 +205,15 @@ public class JXR
     }
 
     /**
+     * @param footer string - set the footer
+     */
+    
+    public void setFooter ( String footer )
+    {
+    	JXR.FOOTER = footer;
+    }
+    
+    /**
      * @param inputEncoding
      */
     public void setInputEncoding( String inputEncoding )
@@ -232,6 +254,22 @@ public class JXR
         this.revision = revision;
     }
 
+    /**
+     * @param header boolean - true enables header, false disables it.
+     */
+    
+    public void setHeader( boolean header ){
+    	JXR.showHeader = header;
+    }
+    
+    /**
+     * @param header boolean - true enables header, false disables it.
+     */
+    
+    public void setFooter( boolean footer ){
+    	JXR.showFooter = footer;
+    }
+    
     /**
      * @param log
      */
@@ -333,7 +371,7 @@ public class JXR
 
         // get a relative link to the javadocs
         String javadoc = javadocLinkDir != null ? getRelativeLink( dest, javadocLinkDir ) : null;
-        transformer.transform( source, dest, locale, inputEncoding, outputEncoding, javadoc, this.revision );
+        transformer.transform( source, dest, locale, inputEncoding, outputEncoding, javadoc, this.revision);
     }
 
     /**

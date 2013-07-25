@@ -28,10 +28,20 @@ under the License.
     <version>2.4-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.apache.maven</groupId>
-  <artifactId>maven-jxr</artifactId>
+  <groupId>com.contemplateltd</groupId>
+  <artifactId>libJXR</artifactId>
 
-  <name>Maven JXR</name>
+  <name>libJXR</name>
+  <version>1.0</version>
+  
+ <licenses>
+  <license>
+    <name>MIT license</name>
+    <url>http://opensource.org/licenses/MIT</url>
+    <distribution>repo</distribution>
+    <comments>Copyright (c) &lt;2013&gt; &lt;The University of Edinburgh&gt;</comments>
+  </license>
+ </licenses>
 
   <dependencies>
     <dependency>
@@ -60,4 +70,12 @@ under the License.
       <version>2.6</version>
     </dependency>
   </dependencies>
+  <description>A fork of Maven-JXR adding several features:
+        Optional footer (and ability to set one)
+        Formating fixes
+        Lines are now inside of &lt;div&gt; for easier manipulation</description>
+  <organization>
+        <name>The University of Edinburgh</name>
+        <url>http://www.ed.ac.uk</url>
+  </organization>
 </project>
