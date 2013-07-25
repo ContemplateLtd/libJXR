@@ -20,30 +20,30 @@ Build
 In order to build the project you need the apache snapshot repository enabled in your ~/.m2/settings.xml.
 To do that you need to add the following to that file:
   <pre>
-  <settings>
+  &lt;settings&gt;
  
-  <profiles>
-    <profile>
-      <id>apache-snapshots</id>
-      <repositories>
-        <repository>
-          <id>apache-snapshots</id>
-          <url>http://repository.apache.org/snapshots/</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
+  &lt;profiles&gt;
+    &lt;profile&gt;
+      &lt;id&gt;apache-snapshots&lt;/id&gt;
+      &lt;repositories&gt;
+        &lt;repository&gt;
+          &lt;id&gt;apache-snapshots&lt;/id&gt;
+          &lt;url&gt;http://repository.apache.org/snapshots/&lt;/url&gt;
+          &lt;releases&gt;
+            &lt;enabled&gt;false&lt;/enabled&gt;
+          &lt;/releases&gt;
+          &lt;snapshots&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+          &lt;/snapshots&gt;
+        &lt;/repository&gt;
+      &lt;/repositories&gt;
+    &lt;/profile&gt;
+  &lt;/profiles&gt;
  
-  <activeProfiles>
-    <activeProfile>apache-snapshots</activeProfile>
-  </activeProfiles>
-</settings>
+  &lt;activeProfiles&gt;
+    &lt;activeProfile&gt;apache-snapshots&lt;/activeProfile&gt;
+  &lt;/activeProfiles&gt;
+&lt;/settings&gt;
 </pre>
 
 Licenses
