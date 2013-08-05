@@ -1,4 +1,7 @@
+Files within libJXR have multiple licenses. Almost all of the code is licensed under the apache 2.0 license.
+
 Copyright 2013 The University of Edinburgh
+Copyright 2004-2013 The maven-jxr team. http://maven.apache.org/jxr/license.html
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11,3 +14,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+JavaCodeTransform is licensed under the BSD-new license. 
+Please check src/main/java/org/apache/maven/jxr/JavaCodeTransform.java if you
+would like to know more.
