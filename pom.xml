@@ -29,7 +29,7 @@ under the License.
   </parent>
 
   <groupId>com.contemplateltd</groupId>
-  <artifactId>libJXR</artifactId>
+  <artifactId>libjxr</artifactId>
 
   <name>libJXR</name>
   <version>1.0</version>

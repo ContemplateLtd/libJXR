@@ -49,4 +49,4 @@ To do that you need to add the following to that file:
 Licenses
 ---------
 
-libJXR is mostly Apache 2.0 with the parts modified by me being MIT.
+libJXR is licensed under the Apache 2.0 license.
